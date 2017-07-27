@@ -46,6 +46,11 @@ class Table extends BaseTable
         return trim($this->parseComment('externalRelations'));
     }
 
+    public function getInheritances()
+    {
+        return trim($this->parseComment('inheritances'));
+    }
+
     public function getModelName()
     {
         if ($this->isExternal()) {
@@ -107,6 +112,12 @@ class Table extends BaseTable
                 ->outdent()
                 ->close()
             ;
+
+            if ($inheritances = trim($this->getInheritances())) {
+                $writer
+                    ->write($inheritances)
+                ;
+            }
 
             return self::WRITE_OK;
         }
