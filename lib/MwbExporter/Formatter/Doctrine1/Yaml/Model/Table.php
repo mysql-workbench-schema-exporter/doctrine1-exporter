@@ -110,14 +110,9 @@ class Table extends BaseTable
                         ->writeIf($engine = $this->parameters->get('tableEngine'), 'type: '.$engine)
                     ->outdent()
                 ->outdent()
+                ->writeIf($inheritances = trim($this->getInheritances()), $inheritances)
                 ->close()
             ;
-
-            if ($inheritances = trim($this->getInheritances())) {
-                $writer
-                    ->write($inheritances)
-                ;
-            }
 
             return self::WRITE_OK;
         }
