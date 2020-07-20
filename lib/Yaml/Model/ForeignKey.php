@@ -28,7 +28,6 @@
 namespace MwbExporter\Formatter\Doctrine1\Yaml\Model;
 
 use MwbExporter\Model\ForeignKey as BaseForeignKey;
-use Doctrine\Common\Inflector\Inflector;
 use MwbExporter\Writer\WriterInterface;
 
 class ForeignKey extends BaseForeignKey
@@ -51,7 +50,7 @@ class ForeignKey extends BaseForeignKey
                     ->write('class: '.$this->referencedTable->getModelName())
                     ->write('local: '.$this->getLocal()->getColumnName())
                     ->write('foreign: '.$this->getForeign()->getColumnName())
-                    ->write('foreignAlias: '.(($alias = $this->getForeignAlias()) ? $alias : ($this->isManyToOne() ? Inflector::pluralize($this->referencedTable->getModelName()) : $this->referencedTable->getModelName())))
+                    ->write('foreignAlias: '.(($alias = $this->getForeignAlias()) ? $alias : ($this->isManyToOne() ? $this->referencedTable->getPluralModelName() : $this->referencedTable->getModelName())))
                     ->write('onDelete: '.strtolower($this->parameters->get('deleteRule')))
                     ->write('onUpdate: '.strtolower($this->parameters->get('updateRule')))
                 ->outdent()
