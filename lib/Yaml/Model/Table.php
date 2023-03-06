@@ -36,19 +36,19 @@ class Table extends BaseTable
 {
     public function getActAsBehaviour()
     {
-        return trim($this->parseComment('actAs'));
+        return trim((string) $this->parseComment('actAs'));
     }
 
     public function getExternalRelations()
     {
         // processing external Relation
         // {d:externalRelations}[..]{/d:externalRelations}
-        return trim($this->parseComment('externalRelations'));
+        return trim((string) $this->parseComment('externalRelations'));
     }
 
     public function getInheritances()
     {
-        return trim($this->parseComment('inheritances'));
+        return trim((string) $this->parseComment('inheritances'));
     }
 
     public function getModelName()
@@ -75,7 +75,7 @@ class Table extends BaseTable
                 })
                 ->write('%s:', $this->getModelName())
                 ->indent()
-                    ->writeIf($actAs = trim($this->getActAsBehaviour()), $actAs)
+                    ->writeIf($actAs = $this->getActAsBehaviour(), $actAs)
                     ->write('tableName: '.($this->getConfig()->get(Formatter::CFG_EXTEND_TABLENAME_WITH_SCHEMA) ? $this->getSchema()->getName().'.' : '').$this->getRawTableName())
                     ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
                         $_this->getColumns()->write($writer);
@@ -110,7 +110,7 @@ class Table extends BaseTable
                         ->writeIf($engine = $this->parameters->get('tableEngine'), 'type: '.$engine)
                     ->outdent()
                 ->outdent()
-                ->writeIf($inheritances = trim($this->getInheritances()), $inheritances)
+                ->writeIf($inheritances = $this->getInheritances(), $inheritances)
                 ->close()
             ;
 
