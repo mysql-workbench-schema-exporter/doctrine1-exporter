@@ -44,7 +44,7 @@ class Column extends BaseColumn
                 // enum and set values
                 ->writeCallback(function(WriterInterface $writer, Column $_this = null) {
                     if ($values = $_this->getParameters()->get('datatypeExplicitParams')) {
-                        $writer->write('values: %s', strtr($values, array('(' => '[', ')' => ']')));
+                        $writer->write('values: %s', strtr($values, ['(' => '[', ')' => ']']));
                     }
                 })
                 ->writeIf(($default = $this->getDefaultValue()), 'default: '.$default)

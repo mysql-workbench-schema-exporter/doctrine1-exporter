@@ -1,0 +1,26 @@
+{
+    "export": "doctrine1-yaml",
+    "zip": false,
+    "dir": "build",
+    "params": {
+        "language": "english",
+        "namingStrategy": "as-is",
+        "logToConsole": false,
+        "logFile": "",
+        "backupExistingFile": true,
+        "useTabs": false,
+        "indentation": 2,
+        "eolDelimeter": "win",
+        "addGeneratorInfoAsComment": true,
+        "filename": "%entity%.%extension%",
+        "skipPluralNameChecking": false,
+        "useLoggedStorage": false,
+        "sortTablesAndViews": true,
+        "exportOnlyTableCategorized": "",
+        "enhanceManyToManyDetection": true,
+        "skipManyToManyTables": true,
+        "stripMultipleUnderscores": false,
+        "asIsUserDatatypePrefix": "",
+        "extendTableNameWithSchemaName": false
+    }
+}

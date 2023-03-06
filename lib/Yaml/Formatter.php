@@ -37,11 +37,11 @@ class Formatter extends BaseFormatter
     protected function init()
     {
         parent::init();
-        $this->addConfigurations(array(
+        $this->addConfigurations([
             static::CFG_INDENTATION                   => 2,
             static::CFG_FILENAME                      => '%entity%.%extension%',
             static::CFG_EXTEND_TABLENAME_WITH_SCHEMA  => false,
-        ));
+        ]);
     }
 
     /**
