@@ -46,6 +46,6 @@ abstract class Formatter extends BaseFormatter
      */
     protected function getCommentTagPrefixes()
     {
-        return array_merge(parent::getCommentTagPrefixes(), array('d', 'doctrine'));
+        return array_merge(parent::getCommentTagPrefixes(), ['d', 'doctrine']);
     }
 }

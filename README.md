@@ -1,10 +1,15 @@
 # README
 
+![Build Status](https://github.com/mysql-workbench-schema-exporter/doctrine1-exporter/actions/workflows/continuous-integration.yml/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/mysql-workbench-schema-exporter/doctrine1-exporter/v/stable.svg)](https://packagist.org/packages/mysql-workbench-schema-exporter/doctrine1-exporter)
+[![Total Downloads](https://poser.pugx.org/mysql-workbench-schema-exporter/doctrine1-exporter/downloads.svg)](https://packagist.org/packages/mysql-workbench-schema-exporter/doctrine1-exporter) 
+[![License](https://poser.pugx.org/mysql-workbench-schema-exporter/doctrine1-exporter/license.svg)](https://packagist.org/packages/mysql-workbench-schema-exporter/doctrine1-exporter)
+
 This is an exporter to convert [MySQL Workbench](http://www.mysql.com/products/workbench/) Models (\*.mwb) to Doctrine 1 YAML Schema.
 
 ## Prerequisites
 
-  * PHP 5.4+
+  * PHP 7.2+
   * Composer to install the dependencies
 
 ## Installation
@@ -13,13 +18,13 @@ This is an exporter to convert [MySQL Workbench](http://www.mysql.com/products/w
 php composer.phar require --dev mysql-workbench-schema-exporter/doctrine1-exporter
 ```
 
-This will install the exporter and also require [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/mysql-workbench-schema-exporter).
+This will install the exporter and also require [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/doctrine1-exporter).
 
 You then can invoke the CLI script using `vendor/bin/mysql-workbench-schema-export`.
 
 ## Formatter Setup Options
 
-Additionally to the [common options](https://github.com/mysql-workbench-schema-exporter/mysql-workbench-schema-exporter#configuring-mysql-workbench-schema-exporter) of mysql-workbench-schema-exporter these options are supported:
+Additionally to the [common options](https://github.com/mysql-workbench-schema-exporter/doctrine1-exporter#configuring-mysql-workbench-schema-exporter) of mysql-workbench-schema-exporter these options are supported:
 
 ### Doctrine 1.0 YAML Schema
 
@@ -52,7 +57,7 @@ Additionally to the [common options](https://github.com/mysql-workbench-schema-e
 
 ## Command Line Interface (CLI)
 
-See documentation for [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/mysql-workbench-schema-exporter#command-line-interface-cli)
+See documentation for [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/doctrine1-exporter#command-line-interface-cli)
 
 ## Links
 

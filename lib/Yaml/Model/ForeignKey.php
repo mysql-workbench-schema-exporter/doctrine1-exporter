@@ -34,7 +34,7 @@ class ForeignKey extends BaseForeignKey
 {
     public function getForeignAlias()
     {
-        return trim($this->parseComment('foreignAlias'));
+        return trim((string) $this->parseComment('foreignAlias'));
     }
 
     public function write(WriterInterface $writer)
