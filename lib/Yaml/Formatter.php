@@ -104,4 +104,14 @@ class Formatter extends BaseFormatter
     {
         return 'yml';
     }
+
+    /**
+     * Get configuration scope.
+     *
+     * @return string
+     */
+    public static function getScope()
+    {
+        return 'Doctrine 1.0 Yaml';
+    }
 }
