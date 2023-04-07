@@ -4,7 +4,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 Johannes Mueller <circus2(at)web.de>
- * Copyright (c) 2012-2014 Toha <tohenk@yahoo.com>
+ * Copyright (c) 2012-2023 Toha <tohenk@yahoo.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -47,12 +47,12 @@ class ForeignKey extends BaseForeignKey
             $writer
                 ->write('%s:', 0 === strpos($this->getName(), 'd:') ? substr($this->getName(), 2) : $this->referencedTable->getModelName())
                 ->indent()
-                    ->write('class: '.$this->referencedTable->getModelName())
-                    ->write('local: '.$this->getLocal()->getColumnName())
-                    ->write('foreign: '.$this->getForeign()->getColumnName())
-                    ->write('foreignAlias: '.(($alias = $this->getForeignAlias()) ? $alias : ($this->isManyToOne() ? $this->referencedTable->getPluralModelName() : $this->referencedTable->getModelName())))
-                    ->write('onDelete: '.strtolower($this->parameters->get('deleteRule')))
-                    ->write('onUpdate: '.strtolower($this->parameters->get('updateRule')))
+                ->write('class: '.$this->referencedTable->getModelName())
+                ->write('local: '.$this->getLocal()->getColumnName())
+                ->write('foreign: '.$this->getForeign()->getColumnName())
+                ->write('foreignAlias: '.(($alias = $this->getForeignAlias()) ? $alias : ($this->isManyToOne() ? $this->referencedTable->getPluralModelName() : $this->referencedTable->getModelName())))
+                ->write('onDelete: '.strtolower($this->parameters->get('deleteRule')))
+                ->write('onUpdate: '.strtolower($this->parameters->get('updateRule')))
                 ->outdent()
             ;
         }

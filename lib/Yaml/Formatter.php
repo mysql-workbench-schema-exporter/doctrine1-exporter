@@ -4,7 +4,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 Johannes Mueller <circus2(at)web.de>
- * Copyright (c) 2012-2014 Toha <tohenk@yahoo.com>
+ * Copyright (c) 2012-2023 Toha <tohenk@yahoo.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,21 +27,18 @@
 
 namespace MwbExporter\Formatter\Doctrine1\Yaml;
 
+use MwbExporter\Formatter\Doctrine1\Yaml\Configuration\TableNameExtend as TableNameExtendConfiguration;
 use MwbExporter\Formatter\Doctrine1\Formatter as BaseFormatter;
 use MwbExporter\Model\Base;
 
 class Formatter extends BaseFormatter
 {
-    const CFG_EXTEND_TABLENAME_WITH_SCHEMA = 'extendTableNameWithSchemaName';
-
     protected function init()
     {
         parent::init();
-        $this->addConfigurations([
-            static::CFG_INDENTATION                   => 2,
-            static::CFG_FILENAME                      => '%entity%.%extension%',
-            static::CFG_EXTEND_TABLENAME_WITH_SCHEMA  => false,
-        ]);
+        $this->getConfigurations()
+            ->add(new TableNameExtendConfiguration())
+        ;
     }
 
     /**

@@ -4,7 +4,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 Johannes Mueller <circus2(at)web.de>
- * Copyright (c) 2012-2014 Toha <tohenk@yahoo.com>
+ * Copyright (c) 2012-2023 Toha <tohenk@yahoo.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +27,11 @@
 
 namespace MwbExporter\Formatter\Doctrine1\Yaml\Model;
 
+use MwbExporter\Configuration\Comment as CommentConfiguration;
+use MwbExporter\Formatter\Doctrine1\Yaml\Configuration\TableNameExtend as TableNameExtendConfiguration;
+use MwbExporter\Helper\Comment;
 use MwbExporter\Model\Table as BaseTable;
 use MwbExporter\Writer\WriterInterface;
-use MwbExporter\Formatter\Doctrine1\Yaml\Formatter;
-use MwbExporter\Helper\Comment;
 
 class Table extends BaseTable
 {
@@ -66,7 +67,7 @@ class Table extends BaseTable
             $writer
                 ->open($this->getTableFileName())
                 ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
-                    if ($_this->getConfig()->get(Formatter::CFG_ADD_COMMENT)) {
+                    if ($_this->getConfig(CommentConfiguration::class)->getValue()) {
                         $writer
                             ->write($_this->getFormatter()->getComment(Comment::FORMAT_YAML))
                             ->write('')
@@ -75,40 +76,40 @@ class Table extends BaseTable
                 })
                 ->write('%s:', $this->getModelName())
                 ->indent()
-                    ->writeIf($actAs = $this->getActAsBehaviour(), $actAs)
-                    ->write('tableName: '.($this->getConfig()->get(Formatter::CFG_EXTEND_TABLENAME_WITH_SCHEMA) ? $this->getSchema()->getName().'.' : '').$this->getRawTableName())
-                    ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
-                        $_this->getColumns()->write($writer);
-                    })
-                    ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
-                        $externalRelation = $_this->getExternalRelations();
-                        if (count($_this->getTableRelations()) || $externalRelation) {
-                            $writer->write('relations:');
-                            $writer->indent();
-                            foreach ($_this->getTableRelations() as $relation) {
-                                $relation->write($writer);
-                            }
-                            if ($externalRelation) {
-                                $writer->write($externalRelation);
-                            }
-                            $writer->outdent();
+                ->writeIf($actAs = $this->getActAsBehaviour(), $actAs)
+                ->write('tableName: '.($this->getConfig(TableNameExtendConfiguration::class)->getValue() ? $this->getSchema()->getName().'.' : '').$this->getRawTableName())
+                ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                    $_this->getColumns()->write($writer);
+                })
+                ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                    $externalRelation = $_this->getExternalRelations();
+                    if (count($_this->getTableRelations()) || $externalRelation) {
+                        $writer->write('relations:');
+                        $writer->indent();
+                        foreach ($_this->getTableRelations() as $relation) {
+                            $relation->write($writer);
                         }
-                    })
-                    ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
-                        if (count($_this->getTableIndices())) {
-                            $writer->write('indexes:');
-                            $writer->indent();
-                            foreach ($_this->getTableIndices() as $index) {
-                                $index->write($writer);
-                            }
-                            $writer->outdent();
+                        if ($externalRelation) {
+                            $writer->write($externalRelation);
                         }
-                    })
-                    ->write('options:')
-                    ->indent()
-                        ->write('charset: '.(($charset = $this->parameters->get('defaultCharacterSetName')) ? $charset : 'utf8'))
-                        ->writeIf($engine = $this->parameters->get('tableEngine'), 'type: '.$engine)
-                    ->outdent()
+                        $writer->outdent();
+                    }
+                })
+                ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                    if (count($_this->getTableIndices())) {
+                        $writer->write('indexes:');
+                        $writer->indent();
+                        foreach ($_this->getTableIndices() as $index) {
+                            $index->write($writer);
+                        }
+                        $writer->outdent();
+                    }
+                })
+                ->write('options:')
+                ->indent()
+                ->write('charset: '.(($charset = $this->parameters->get('defaultCharacterSetName')) ? $charset : 'utf8'))
+                ->writeIf($engine = $this->parameters->get('tableEngine'), 'type: '.$engine)
+                ->outdent()
                 ->outdent()
                 ->writeIf($inheritances = $this->getInheritances(), $inheritances)
                 ->close()

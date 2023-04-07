@@ -4,7 +4,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 Johannes Mueller <circus2(at)web.de>
- * Copyright (c) 2012-2014 Toha <tohenk@yahoo.com>
+ * Copyright (c) 2012-2023 Toha <tohenk@yahoo.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,22 +37,22 @@ class Column extends BaseColumn
         $writer
             ->write('%s:', $this->getColumnName())
             ->indent()
-                ->write('type: %s', $this->getFormatter()->getDatatypeConverter()->getType($this))
-                ->writeIf($this->isPrimary(), 'primary: true')
-                ->writeIf($this->isNotNull(), 'notnull: true')
-                ->writeIf($this->isAutoIncrement(), 'autoincrement: true')
+            ->write('type: %s', $this->getFormatter()->getDatatypeConverter()->getType($this))
+            ->writeIf($this->isPrimary(), 'primary: true')
+            ->writeIf($this->isNotNull(), 'notnull: true')
+            ->writeIf($this->isAutoIncrement(), 'autoincrement: true')
                 // enum and set values
-                ->writeCallback(function(WriterInterface $writer, Column $_this = null) {
-                    if ($values = $_this->getParameters()->get('datatypeExplicitParams')) {
-                        $writer->write('values: %s', strtr($values, ['(' => '[', ')' => ']']));
-                    }
-                })
-                ->writeIf(($default = $this->getDefaultValue()), 'default: '.$default)
-                ->writeCallback(function(WriterInterface $writer, Column $_this = null) {
-                    foreach ($_this->getNode()->xpath("value[@key='flags']/value") as $flag) {
-                        $writer->write(strtolower($flag).': true');
-                    }
-                })
+            ->writeCallback(function(WriterInterface $writer, Column $_this = null) {
+                if ($values = $_this->getParameters()->get('datatypeExplicitParams')) {
+                    $writer->write('values: %s', strtr($values, ['(' => '[', ')' => ']']));
+                }
+            })
+            ->writeIf(($default = $this->getDefaultValue()), 'default: '.$default)
+            ->writeCallback(function(WriterInterface $writer, Column $_this = null) {
+                foreach ($_this->getNode()->xpath("value[@key='flags']/value") as $flag) {
+                    $writer->write(strtolower($flag).': true');
+                }
+            })
             ->outdent()
         ;
 

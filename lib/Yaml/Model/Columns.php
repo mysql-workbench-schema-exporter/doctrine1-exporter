@@ -4,7 +4,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 Johannes Mueller <circus2(at)web.de>
- * Copyright (c) 2012-2014 Toha <tohenk@yahoo.com>
+ * Copyright (c) 2012-2023 Toha <tohenk@yahoo.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,11 +37,11 @@ class Columns extends BaseColumns
         $writer
             ->write('columns:')
             ->indent()
-                ->writeCallback(function(WriterInterface $writer, Columns $_this = null) {
-                    foreach ($_this as $column) {
-                        $column->write($writer);
-                    }
-                })
+            ->writeCallback(function(WriterInterface $writer, Columns $_this = null) {
+                foreach ($_this as $column) {
+                    $column->write($writer);
+                }
+            })
             ->outdent()
         ;
 
