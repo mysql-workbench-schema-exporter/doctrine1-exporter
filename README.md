@@ -1,9 +1,9 @@
-# README
-
 ![Build Status](https://github.com/mysql-workbench-schema-exporter/doctrine1-exporter/actions/workflows/continuous-integration.yml/badge.svg)
 [![Latest Stable Version](https://poser.pugx.org/mysql-workbench-schema-exporter/doctrine1-exporter/v/stable.svg)](https://packagist.org/packages/mysql-workbench-schema-exporter/doctrine1-exporter)
 [![Total Downloads](https://poser.pugx.org/mysql-workbench-schema-exporter/doctrine1-exporter/downloads.svg)](https://packagist.org/packages/mysql-workbench-schema-exporter/doctrine1-exporter) 
 [![License](https://poser.pugx.org/mysql-workbench-schema-exporter/doctrine1-exporter/license.svg)](https://packagist.org/packages/mysql-workbench-schema-exporter/doctrine1-exporter)
+
+# README
 
 This is an exporter to convert [MySQL Workbench](http://www.mysql.com/products/workbench/) Models (\*.mwb) to Doctrine 1 YAML Schema.
 

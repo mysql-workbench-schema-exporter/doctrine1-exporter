@@ -28,6 +28,7 @@
 namespace MwbExporter\Formatter\Doctrine1\Yaml\Model;
 
 use MwbExporter\Configuration\Comment as CommentConfiguration;
+use MwbExporter\Configuration\Header as HeaderConfiguration;
 use MwbExporter\Formatter\Doctrine1\Yaml\Configuration\TableNameExtend as TableNameExtendConfiguration;
 use MwbExporter\Helper\Comment;
 use MwbExporter\Model\Table as BaseTable;
@@ -67,6 +68,14 @@ class Table extends BaseTable
             $writer
                 ->open($this->getTableFileName())
                 ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                    /** @var \MwbExporter\Configuration\Header $header */
+                    $header = $this->getConfig(HeaderConfiguration::class);
+                    if ($content = $header->getHeader()) {
+                        $writer
+                            ->write($_this->getFormatter()->getFormattedComment($content, Comment::FORMAT_YAML))
+                            ->write('')
+                        ;
+                    }
                     if ($_this->getConfig(CommentConfiguration::class)->getValue()) {
                         $writer
                             ->write($_this->getFormatter()->getComment(Comment::FORMAT_YAML))
