@@ -18,7 +18,7 @@ This is an exporter to convert [MySQL Workbench](http://www.mysql.com/products/w
 composer require --dev mysql-workbench-schema-exporter/doctrine1-exporter
 ```
 
-This will install the exporter and also require [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/doctrine1-exporter).
+This will install the exporter and also require [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/mysql-workbench-schema-exporter).
 
 You then can invoke the CLI script using `vendor/bin/mysql-workbench-schema-export`.
 
@@ -28,7 +28,7 @@ You then can invoke the CLI script using `vendor/bin/mysql-workbench-schema-expo
 
 ## Command Line Interface (CLI)
 
-See documentation for [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/doctrine1-exporter#command-line-interface-cli)
+See documentation for [mysql-workbench-schema-exporter](https://github.com/mysql-workbench-schema-exporter/mysql-workbench-schema-exporter#command-line-interface-cli)
 
 ## Links
 
