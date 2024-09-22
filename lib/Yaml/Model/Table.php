@@ -30,7 +30,6 @@ namespace MwbExporter\Formatter\Doctrine1\Yaml\Model;
 use MwbExporter\Configuration\Comment as CommentConfiguration;
 use MwbExporter\Configuration\Header as HeaderConfiguration;
 use MwbExporter\Formatter\Doctrine1\Yaml\Configuration\TableNameExtend as TableNameExtendConfiguration;
-use MwbExporter\Helper\Comment;
 use MwbExporter\Model\Table as BaseTable;
 use MwbExporter\Writer\WriterInterface;
 
@@ -72,15 +71,21 @@ class Table extends BaseTable
                     $header = $this->getConfig(HeaderConfiguration::class);
                     if ($content = $header->getHeader()) {
                         $writer
-                            ->write($_this->getFormatter()->getFormattedComment($content, Comment::FORMAT_YAML, null))
+                            ->commentStart()
+                                ->write($content)
+                            ->commentEnd()
                             ->write('')
                         ;
                     }
                     if ($_this->getConfig(CommentConfiguration::class)->getValue()) {
-                        $writer
-                            ->write($_this->getFormatter()->getComment(Comment::FORMAT_YAML))
-                            ->write('')
-                        ;
+                        if ($content = $_this->getFormatter()->getComment(null)) {
+                            $writer
+                                ->commentStart()
+                                    ->write($content)
+                                ->commentEnd()
+                                ->write('')
+                            ;
+                        }
                     }
                 })
                 ->write('%s:', $this->getModelName())
