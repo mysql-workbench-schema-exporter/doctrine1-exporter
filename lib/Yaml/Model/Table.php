@@ -66,7 +66,7 @@ class Table extends BaseTable
         if (!$this->isExternal()) {
             $writer
                 ->open($this->getTableFileName())
-                ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                ->writeCallback(function(WriterInterface $writer, ?Table $_this = null) {
                     /** @var \MwbExporter\Configuration\Header $header */
                     $header = $this->getConfig(HeaderConfiguration::class);
                     if ($content = $header->getHeader()) {
@@ -88,10 +88,10 @@ class Table extends BaseTable
                 ->indent()
                 ->writeIf($actAs = $this->getActAsBehaviour(), $actAs)
                 ->write('tableName: '.($this->getConfig(TableNameExtendConfiguration::class)->getValue() ? $this->getSchema()->getName().'.' : '').$this->getRawTableName())
-                ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                ->writeCallback(function(WriterInterface $writer, ?Table $_this = null) {
                     $_this->getColumns()->write($writer);
                 })
-                ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                ->writeCallback(function(WriterInterface $writer, ?Table $_this = null) {
                     $externalRelation = $_this->getExternalRelations();
                     if (count($_this->getTableRelations()) || $externalRelation) {
                         $writer->write('relations:');
@@ -105,7 +105,7 @@ class Table extends BaseTable
                         $writer->outdent();
                     }
                 })
-                ->writeCallback(function(WriterInterface $writer, Table $_this = null) {
+                ->writeCallback(function(WriterInterface $writer, ?Table $_this = null) {
                     if (count($_this->getTableIndices())) {
                         $writer->write('indexes:');
                         $writer->indent();
